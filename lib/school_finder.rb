@@ -17,22 +17,26 @@ module SchoolFinder
   def self.create_array
 
     page_number = 1
-    page_number_string = page_number.to_s
     schools_array = []
     page_items_array = ["initial_value"]
 
     # until page_items_array.length == 0 do
-      school_page = "http://education.data.gov.uk/doc/school.json?_pageSize=50&_page=" + page_number_string
+      school_page = "http://education.data.gov.uk/doc/school.json?_pageSize=50&_page=" + page_number.to_s
+      # puts school_page
       resp = Net::HTTP.get_response(URI.parse(school_page))
       buffer = resp.body
-      # puts buffer.class return string
+      # puts buffer.class returns string
       page_hash = JSON.parse(buffer)
       # puts page_hash.class returns hash
       page_items_array = page_hash['result']['items']
-      # puts page_items_array.class returns array containing a hash for each school
+
+      get_postcode(page_items_array)
+
+      # puts page_items_array.class returns array
+      # containing a hash for each school
       schools_array.push(page_items_array)
 
-      # puts page_items_hash
+      # puts page_items_array
       # puts page_hash['result']['items']
       # puts page_hash['result']['items']['uniqueReferenceNumber']
       # puts page_hash['result']['items']['label']
@@ -40,6 +44,14 @@ module SchoolFinder
       # http://education.data.gov.uk/id/school/100866
       page_number += 1
     # end
+  end
+
+  def self.get_postcode(array)
+    array.each do |x|
+      # gets the url for the school info
+      a = x['_about']
+      puts a
+    end
   end
 
 end
