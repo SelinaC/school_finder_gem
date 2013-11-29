@@ -8,6 +8,10 @@ Add this line to your application's Gemfile:
 
     gem 'school_finder'
 
+Add an enviroment variable to your zshrc file:
+
+  $ export zoopla_id=<insert zoopla_api_key>
+
 And then execute:
 
     $ bundle
