@@ -1,3 +1,4 @@
+
 # SchoolFinder
 
 TODO: Write a gem description
